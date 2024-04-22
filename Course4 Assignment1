@@ -1,0 +1,60 @@
+# Coursera-Course-4
+Assignments 
+card_t * add_empty_card_to (deck_t * deck); 
+
+// Add a card whose value and suit are both 0 and return a pointer to it in the deck.
+// This will add an invalid card to use as a placeholder for an unknown card. 
+
+card_t * add_empty_card_to (deck_t * deck) {
+	
+	//create and initialise the 'empty' card..
+	card_t * emptyCard = malloc (sizeof(*card_t));
+	emptyCard->value = 0;
+	emptyCard->suit = NUM_SUITS;
+	
+	//increase the size of the deck by one 
+	deck->n_cards++;
+	deck->cards = realloc (deck->n_cards * sizeof(*deck->cards));
+	deck->cards [deck->n_cards-1] = emptyCard;
+	return deck->cards [deck->n_cards-1];
+	
+}
+	
+deck_t * make_deck_exclude (deck_t * excluded_cards);
+
+// Create a deck that is full EXCEPT for all the cards that appear
+// in excluded_cards. For example, if excluded_cards has Kh and Qs
+// you would create a deck that has 50 cards -- all of them except
+// Kh and Qs. You will need to use malloc to allocate this deck. 
+// (You will want this for the next function). Don't forget you wrote
+// 
+// card_t card_from_num (unsigned c); 
+// 
+// in course 2, and 
+// 
+// int deck_contains (deck_t * d, card_t c);
+//
+// in course 3. They might be useful here. 
+
+deck_t * make_deck_exclude (deck_t * excluded_cards) {
+	
+	int numCards = 52 - excluded_cards -> n_cards;
+	
+	deck_t * deck = malloc (sizeof (*deck_t));
+	deck->cards = malloc (numCards * sizeof(*deck->cards));
+	
+	int j = 0;
+	
+	//populate the deck->cards array, 
+	
+	for (int i = 0; i < 52; i++) {
+		card_t newCard = card_from_num(i);
+		if (deck_contains (excluded_cards, newCard) == 1) { 
+			//card is an 'excluded card'
+			continue;
+		}
+		else {
+			
+		}
+	}	
+}
